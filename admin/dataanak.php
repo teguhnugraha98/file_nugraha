@@ -51,6 +51,7 @@
                                                 <label>Tingkatan Sekolah</label>
                                                 <select name="tingkat" class="form-control" required="required">
                                                     <option value="">- Pilih -</option>
+                                                    <option value="0">0</option>
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
@@ -284,6 +285,9 @@
                                                                             <label>Tingkatan sekolah</label>
                                                                             <select name="tingkat" style="width:100%" class="form-control" required="required">
                                                                                 <option value="">- Pilih -</option>
+                                                                                <option <?php if ($d['tingkat_sekolah'] == "0") {
+                                                                                            echo "selected='selected'";
+                                                                                        } ?> value="0">0</option>
                                                                                 <option <?php if ($d['tingkat_sekolah'] == "1") {
                                                                                             echo "selected='selected'";
                                                                                         } ?> value="1">1</option>
