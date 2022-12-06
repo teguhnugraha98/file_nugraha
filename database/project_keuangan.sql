@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 24, 2022 at 09:20 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Host: localhost:3306
+-- Generation Time: Dec 06, 2022 at 09:22 AM
+-- Server version: 10.5.17-MariaDB-cll-lve
+-- PHP Version: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `project_keuangan`
+-- Database: `u8875111_project_keuangan`
 --
 
 -- --------------------------------------------------------
@@ -54,10 +55,9 @@ CREATE TABLE `anak` (
 --
 
 INSERT INTO `anak` (`anak_id`, `umur_sekarang`, `tingkat_sekolah`, `sisa_sekolah`, `asumsi_kuliah`, `inflasi_kuliah`, `biaya_semester`, `biaya_kuliah`, `biaya_hidup`, `hidup_kuliah`, `biaya_buku`, `biaya_pt`, `biaya_seluruhnya`, `kuliah_hidup`, `buku_biaya`, `biaya_penelitian`, `total_biaya`, `return_investasi`, `dana_investasi`) VALUES
-(1, 6, '1', 11, 5, 5, 7, 119720000, 20000000, 34200000, 50000, 50000000, 1197237550, 205000000, 6000000, 2500000, 46000000, 6, 246864528),
-(2, 7, '1', 24, 5000, 6, 7, 6, 7, 6, 1, 6, 6, 6, 6, 6, 6, 6, 7),
-(3, 7, '1', 12, 67, 6, 7, 119720000, 20000, 34200000, 60000000, 2147483647, 2147483647, 2147483647, 2147483647, 25000000, 2147483647, 6, 246864528),
-(4, 6, '1', 5, 5, 7000000, 1197237551, 2000000, 342067872, 5000000, 50000000, 2147483647, 12000000, 2147483647, 600000000, 25000000, 2147483647, 6, 246864528);
+(1, 4, '1', 14, 5, 5, 7000000, 1385952120, 20000000, 395986320, 5000000, 50000000, 2147483647, 2147483647, 60000000, 25000000, 2147483647, 6, 194882850),
+(3, 5, '1', 13, 5, 5, 7000000, 1319954400, 2000000, 377129828, 5000000, 50000000, 2147483647, 2147483647, 60000000, 25000000, 2147483647, 6, 209504751),
+(4, 6, '1', 5, 5, 7, 1197237551, 2000000, 342067872, 5000000, 50000000, 2147483647, 12000000, 2147483647, 600000000, 25000000, 2147483647, 6, 246864528);
 
 -- --------------------------------------------------------
 
@@ -78,8 +78,8 @@ CREATE TABLE `bank` (
 --
 
 INSERT INTO `bank` (`bank_id`, `bank_nama`, `bank_nomor`, `bank_pemilik`, `bank_saldo`) VALUES
-(1, 'BANK BRI', 'Nugraha', '0933-3393', -970200000),
-(3, 'BANK BCA', 'Nugraha', '18280-232-23', -5916116800);
+(1, 'BANK BRI', 'Nugraha', '0933-3393', -983850009),
+(3, 'BANK BCA', 'Nugraha', '18280-232-23', -5900969300);
 
 -- --------------------------------------------------------
 
@@ -121,7 +121,7 @@ INSERT INTO `kategori` (`kategori_id`, `kategori`) VALUES
 (17, 'Gaji Suami'),
 (18, 'Gaji Isteri'),
 (19, 'Usaha Sampingan'),
-(20, 'Bunga'),
+(20, 'Biaya Bunga'),
 (21, 'Dividen'),
 (22, 'Biaya Pangan'),
 (23, 'Biaya Pembantu'),
@@ -130,21 +130,24 @@ INSERT INTO `kategori` (`kategori_id`, `kategori`) VALUES
 (26, 'Biaya Telepon'),
 (27, 'Biaya Air'),
 (28, 'Biaya Kebersihan Taman & Lampu'),
-(29, 'Salon & Babershop'),
-(30, 'Cadangan Perbaikan Rumah'),
+(29, 'Biaya Salon & Babershop'),
+(30, 'Biaya Cadangan Perbaikan Rumah'),
 (31, 'Biaya bensin dan Parkir/transportasi'),
 (32, 'Biaya Pendidikan Anak setiap bulan'),
 (33, 'Biaya Asuransi'),
 (34, 'Biaya/sumbangan Pesta keluarga & Teman'),
 (35, 'Biaya Makanan diluar Rumah'),
-(36, 'Majalah dan Koran'),
-(37, 'Cadangan dan Darurat'),
-(38, 'Lain lain'),
-(39, 'Cicilan Rumah'),
-(40, 'Cicilan Mobil'),
-(41, 'Cicilan Elektronik'),
-(42, 'Tabungan Pensiun'),
-(43, 'Tabungan Pendidikan');
+(36, 'Biaya Majalah dan Koran'),
+(37, 'Biaya Cadangan dana Darurat'),
+(38, 'Biaya Lain lain'),
+(39, 'Biaya Cicilan Rumah'),
+(40, 'Biaya Cicilan Mobil'),
+(41, 'Biaya Cicilan Elektronik'),
+(42, 'Biaya Tabungan Pensiun'),
+(43, 'Biaya Tabungan Pendidikan'),
+(45, 'Pendapatan Bunga'),
+(46, 'Pemasukan Lain Lain'),
+(47, 'Biaya Sandang');
 
 -- --------------------------------------------------------
 
@@ -268,29 +271,33 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`transaksi_id`, `transaksi_tanggal`, `transaksi_jenis`, `transaksi_kategori`, `transaksi_nominal`, `transaksi_keterangan`, `transaksi_bank`) VALUES
-(1, '2022-12-01', 'Pemasukan', 17, 4000000, 'Gaji Suami', 1),
 (2, '2022-12-01', 'Pengeluaran', 22, 1200000, 'Biaya Pangan', 3),
-(3, '2022-12-01', 'Cicilan', 39, 50000000, 'Cicilan Rumah', 3),
-(4, '2022-11-01', 'Pemasukan', 17, 5000000, 'Gaji Suami', 3),
-(5, '2022-11-01', 'Pengeluaran', 23, 3000000, 'Biaya Pembantu', 3),
-(6, '2022-11-01', 'Cicilan', 40, 40000000, 'Cicilan Mobil', 3),
-(7, '2022-11-01', 'Cicilan', 40, 8000000, 'Cicilan mobil', 3),
-(8, '2022-11-03', 'Pemasukan', 17, 5000000, 'Gaji Suami', 1),
-(9, '2022-11-03', 'Pengeluaran', 22, 12000000, 'Biaya Pangan', 3),
-(10, '2022-11-03', 'Cicilan', 40, 2147483647, 'Cicilan Mobil', 3),
-(11, '2022-11-03', 'Pengeluaran', 27, 3000000, 'Biaya air', 3),
-(12, '2022-11-04', 'Pemasukan', 17, 4000000, 'Gaji suami', 1),
-(13, '2022-11-04', 'Pengeluaran', 22, 1100000, 'Biaya Pangan', 1),
-(14, '2022-11-04', 'Cicilan', 39, 800000000, 'Cicilan rumah', 3),
-(15, '2022-11-07', 'Pemasukan', 17, 400000, 'Gaji suami', 3),
-(16, '2022-11-09', 'Pemasukan', 17, 4000000, 'Biaya Suami', 1),
-(17, '2022-11-09', 'Pengeluaran', 22, 1200000, 'Biaya Pangan', 3),
-(18, '2022-11-09', 'Cicilan', 42, 500000, 'Tabungan Pensiun', 3),
-(19, '2022-11-14', 'Pemasukan', 33, 500000, 'biaya asuransi', 1),
-(20, '2022-11-17', 'Cicilan', 39, 1000000000, 'cicilan rumah', 1),
+(3, '2022-12-01', 'Pengeluaran', 39, 0, 'Cicilan Rumah', 3),
+(4, '2022-12-09', 'Pemasukan', 18, 4000000, 'Gaji Isteri', 3),
+(5, '2022-11-01', 'Pengeluaran', 23, 300000, 'Biaya Pembantu', 3),
+(6, '2022-11-01', 'Pengeluaran', 30, 250000, 'Cadangan Perbaikan Rumah', 3),
+(7, '2022-11-01', 'Pengeluaran', 26, 100000, 'Biaya Telepon', 3),
+(8, '2022-11-03', 'Pengeluaran', 47, 750000, 'Biaya Sandang', 1),
+(9, '2022-11-03', 'Pengeluaran', 28, 30000, 'Biaya kebersihan taman', 3),
+(10, '2022-11-03', 'Pengeluaran', 40, 0, 'Cicilan Mobil', 3),
+(11, '2022-11-03', 'Pengeluaran', 27, 100000, 'Biaya air', 3),
+(12, '2022-11-04', 'Pemasukan', 21, 0, 'Dividen', 1),
+(13, '2022-11-04', 'Pengeluaran', 24, 50000, 'Laundry Pakaian', 1),
+(14, '2022-11-04', 'Pemasukan', 45, 100000, 'Bunga Tabungan', 3),
+(16, '2022-12-09', 'Pemasukan', 17, 4000000, 'Gaji Suami', 1),
+(18, '2022-11-09', 'Pengeluaran', 42, 500000, 'Tabungan Pensiun', 3),
+(19, '2022-11-14', 'Pengeluaran', 33, 250000, 'Biaya asuransi', 1),
+(20, '2022-11-17', 'Pengeluaran', 38, 200009, 'Biaya Lain lain', 1),
 (21, '2022-11-22', 'Pemasukan', 17, 4000000, 'Gaji Suami', 1),
-(22, '2022-11-22', 'Pengeluaran', 22, 120000, 'Biaya Pangan', 3),
-(23, '2022-11-22', 'Cicilan', 39, 1500000, 'Cicilan Rumah', 3);
+(22, '2022-11-22', 'Pengeluaran', 22, 1200000, 'Biaya Pangan', 3),
+(23, '2022-11-22', 'Pengeluaran', 39, 0, 'Cicilan Rumah', 3),
+(24, '2022-12-06', 'Pengeluaran', 31, 150000, 'Biaya Bensin', 3),
+(25, '2022-12-06', 'Pemasukan', 19, 750000, 'Jualan Baju', 3),
+(26, '2022-11-25', 'Pengeluaran', 36, 50000, 'Biaya majalah', 3),
+(27, '2022-12-06', 'Pengeluaran', 32, 1000000, 'Biaya pendidikan anak', 3),
+(28, '2022-12-06', 'Pengeluaran', 25, 250000, 'Biaya Listrik', 3),
+(29, '2022-11-30', 'Pengeluaran', 37, 442500, 'Biaya cadangan dana darurat', 3),
+(30, '2022-11-10', 'Pemasukan', 19, 750000, 'Usaha Kolak', 3);
 
 -- --------------------------------------------------------
 
@@ -313,10 +320,11 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `user_nama`, `user_username`, `user_password`, `user_foto`, `user_level`) VALUES
 (1, 'Teguh Nugraha', 'admin', '21232f297a57a5a743894a0e4a801fc3', '482937136_avatar.png', 'administrator'),
-(8, 'Nugraha', 'user', 'ee11cbb19052e40b07aac0ca060c23ee', '1317448945_482937136_avatar.png', 'manajemen'),
-(9, 'Nugraha Manurung', 'nugraha', 'admin', '482937136_avatar.png', 'administrator'),
-(12, 'rizal', 'rizal@gmail.com', '202cb962ac59075b964b07152d234b70', 'foto_user-1669274973.jpg', 'manajemen'),
-(14, 'nugraha manurung', 'manurung@gmail.com', '202cb962ac59075b964b07152d234b70', 'foto_user-1669276620.jpg', 'manajemen');
+(8, 'Nugraha', 'user', '202cb962ac59075b964b07152d234b70', '__482937136_avatar.png', 'manajemen'),
+(9, 'Ferdiando Manurung', 'ferdiando@gmail.com', '202cb962ac59075b964b07152d234b70', '__482937136_avatar.png', 'administrator'),
+(12, 'Sefrizal Manurung', 'rizal@gmail.com', '202cb962ac59075b964b07152d234b70', '___482937136_avatar.png', 'manajemen'),
+(14, 'Ferdiando Manurung', 'ferdiando@gmail.com', '202cb962ac59075b964b07152d234b70', '__482937136_avatar.png', 'manajemen'),
+(15, 'Adler Manurung', 'adler@gmail.com', '202cb962ac59075b964b07152d234b70', '1703769005__user.png', 'administrator');
 
 --
 -- Indexes for dumped tables
@@ -408,7 +416,7 @@ ALTER TABLE `hutang`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `pensiun`
@@ -438,13 +446,13 @@ ALTER TABLE `tingkat`
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `transaksi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `transaksi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
