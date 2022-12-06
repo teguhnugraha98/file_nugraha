@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `anak` (
   `anak_id` int(150) NOT NULL,
   `umur_sekarang` int(150) NOT NULL,
-  `tingkat_sekolah` enum('1','2','3','4','5','6','7','8','9','10','11','12') NOT NULL,
+  `tingkat_sekolah` enum('0','1','2','3','4','5','6','7','8','9','10','11','12') NOT NULL,
   `sisa_sekolah` int(150) NOT NULL,
   `asumsi_kuliah` int(150) NOT NULL,
   `inflasi_kuliah` int(150) NOT NULL,
