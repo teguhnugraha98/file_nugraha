@@ -309,6 +309,12 @@
             <!--The calendar -->
             <div id="calendar" style="width: 100%"></div>
           </div>
+          
+          <!-- kelas date picker -->
+          <div id="datepicker"></div>
+        </div>
+    </div>
+</div>
           <!-- /.box-body -->
         </div>
 
