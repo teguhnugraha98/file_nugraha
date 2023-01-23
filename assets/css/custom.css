@@ -21,7 +21,7 @@
 /* buat custom ukuran smartphone */
 
 
-@media(min-width: 528px) {
+@media(min-width: 600px) {
     /*top: 40px;*/
     margin: 60px; /* ditablet (landscape mobile) */
 
