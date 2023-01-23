@@ -22,7 +22,8 @@
 
 
 @media(min-width: 528px) {
-  .datepicker  {
-    top: 40px; /* ditablet (landscape mobile) */
+    /*top: 40px;*/
+    margin: 60px; /* ditablet (landscape mobile) */
+
   }
 }
