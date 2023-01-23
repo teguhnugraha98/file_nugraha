@@ -1,3 +1,4 @@
+/* buat custom alert */
 .custom-alert{
     margin:1em 1em
 }
@@ -6,22 +7,22 @@
 
 
 .datepicker{
+  
   position: absolute;
   float: left;
-  width: 100%;
-  height: 70%;
+  width: fit-content; /* tambahin ini */
+  height: fit-content; /* tambahin ini */
   font-size: 12px;
   margin: auto;
+  top: 120px; /* sesuain posisinya di mobile */
 
 }
 
+/* buat custom ukuran smartphone */
 
 
-/* buat custom datepacker di smartphone/handhope */
-@media(min-width: 600px){
-  .datepicker{
-    width: 40%;
-    margin: auto;
+@media(min-width: 528px) {
+  .datepicker  {
+    top: 40px; /* ditablet (landscape mobile) */
   }
-
 }
