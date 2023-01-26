@@ -21,9 +21,11 @@
 /* buat custom ukuran smartphone */
 
 
-@media(min-width: 600px) {
+@media(max-width: 700px) {
+    margin:5em 0;
+    
     /*top: 40px;*/
-    margin: 60px; /* ditablet (landscape mobile) */
+    /*margin: 60px; /* ditablet (landscape mobile) */
 
   }
 }
